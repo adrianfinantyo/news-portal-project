@@ -1,0 +1,191 @@
+:root {
+  --coklat-gelap: #46423d;
+  --coklat-tua: #6a5b56;
+  --coklat-muda: #7a7062;
+  --hijau: #9eb7a7;
+  --putih: #f8f6f0;
+  --merah: #fb7979;
+}
+
+* {
+  font-family: "Oswald", sans-serif;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background-image: url("../../../assets/login-page-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-end;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden !important;
+}
+
+.mobile-logo {
+  display: none;
+  position: absolute;
+  width: 80%;
+  height: auto;
+  top: 15%;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 35%;
+  height: 100vh;
+  background-color: var(--coklat-muda);
+  color: var(--putih);
+}
+
+.login-card img {
+  width: 80%;
+  height: auto;
+  margin-bottom: 3rem;
+}
+
+.inner-container {
+  width: 70%;
+}
+
+.inner-container h1 {
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  padding: 1rem 3rem;
+  border-radius: 20px;
+  border: none;
+  width: 100%;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  transition: outline 0.1s ease;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input:focus {
+  outline: none;
+}
+
+form button {
+  width: max-content;
+  margin: 5rem 0;
+  margin-top: 3rem;
+  padding: 1rem 10rem;
+  border-radius: 30px;
+  border: none;
+  background-color: var(--hijau);
+  font-size: 1.8rem;
+  color: black;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  transition: 0.4s;
+}
+
+form button:hover {
+  background-color: #3f7a55; /* Green */
+  color: white;
+}
+
+.inner-container h5 {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+a {
+  color: var(--hijau);
+}
+
+/* breakpoints 2xl */
+@media screen and (max-width: 96em) {
+}
+
+/* breakpoints xl */
+@media screen and (max-width: 80em) {
+  .login-card {
+    width: 40%;
+  }
+
+  .inner-container h1 {
+    font-size: 2.2rem;
+  }
+
+  .inner-container h5 {
+    font-size: 1.5rem;
+  }
+}
+
+/* breakpoints lg */
+@media screen and (max-width: 62em) {
+}
+
+/* breakpoints md */
+@media screen and (max-width: 48em) {
+  .login-card {
+    width: 50%;
+  }
+
+  .login-card img,
+  .inner-container {
+    width: 90%;
+  }
+
+  form button {
+    padding: 1rem 8rem;
+  }
+}
+
+/* breakpoints sm */
+@media screen and (max-width: 30em) {
+  body {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-logo {
+    display: unset;
+  }
+
+  .login-card img {
+    display: none;
+  }
+
+  .login-card {
+    height: max-content;
+    width: 90%;
+    border-radius: 30px;
+  }
+
+  .inner-container {
+    width: 90%;
+  }
+
+  form button {
+    padding: 1rem 5rem;
+    margin: 3rem 0;
+  }
+}
+
+.logo {
+  cursor: pointer;
+}

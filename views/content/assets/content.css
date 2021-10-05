@@ -1,0 +1,154 @@
+* {
+  font-family: "Oswald", sans-serif;
+}
+
+body {
+  background: #f8f6f0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  margin-top: 0px;
+  background: #7a7062;
+  z-index: 1;
+  padding-right: 20rem;
+}
+
+.logo {
+  cursor: pointer;
+  filter: invert(100%);
+}
+nav .active {
+  padding: 0 2rem;
+}
+
+nav #signup {
+  background-color: #46423d;
+}
+
+.navbar {
+  border-radius: none !important;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav li {
+  font-weight: 300;
+  float: left;
+  color: white;
+  margin: 0 2rem;
+  line-height: 4rem;
+}
+
+.navbar-brand img {
+  height: 30px !important;
+  margin-right: 74rem !important;
+}
+
+.logo-wrapper {
+  height: 5rem;
+}
+
+.logo-wrapper img {
+  height: 100%;
+  width: auto;
+}
+
+.center {
+  text-align: center;
+}
+
+.littlenav {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-start;
+  top: 0px;
+  width: 100% !important;
+  background: #46423d;
+  z-index: 0;
+  padding: 0rem 0rem;
+  margin-left: 0px !important;
+  margin-right: auto;
+  border: none;
+  border-radius: none !important;
+}
+
+.littlenav ul {
+  border: none !important;
+}
+
+.littlenav li {
+  text-align: left;
+  margin: auto 0px;
+}
+
+.littlenav a {
+  color: white !important;
+}
+
+.littlenav li:hover {
+  background-color: rgb(144, 160, 137);
+  transition: 1s;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 75% auto;
+  grid-gap: 10px;
+  padding: 10px;
+  padding-left: 125px;
+  padding-top: 50px;
+}
+
+.grid-container img {
+  width: 746px;
+  height: 450px;
+  padding: 20px 20px 20px 0px;
+}
+
+.grid-container p {
+  padding-right: 150px;
+  font-size: 15px;
+}
+
+.detail {
+  font-weight: lighter;
+  font-size: 13px;
+}
+
+.grid-container form {
+  padding-top: 75px;
+}
+
+.line {
+  font-size: 21px !important;
+  border-bottom: 2px solid black !important;
+  padding: 10px;
+  color: #f65050;
+}
+
+#submit {
+  position: absolute;
+  width: 118px;
+  height: 30px;
+  border-radius: 12px;
+  background-color: #9eb7a7;
+  margin-top: 10px;
+}
+
+.grid-container table {
+  border: none;
+  width: 100%;
+}
+
+.grid-container table td {
+  padding: 10px;
+}
