@@ -34,8 +34,18 @@ body {
   display: none;
   position: absolute;
   width: 80%;
+  top: 10%;
+}
+
+.mobile-logo img {
+  width: 100%;
   height: auto;
-  top: 15%;
+}
+
+.a-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-card {
@@ -184,8 +194,4 @@ a {
     padding: 1rem 5rem;
     margin: 3rem 0;
   }
-}
-
-.logo {
-  cursor: pointer;
 }

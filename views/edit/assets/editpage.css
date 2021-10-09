@@ -1,0 +1,256 @@
+:root {
+  --coklat-gelap: #46423d;
+  --coklat-tua: #6a5b56;
+  --coklat-muda: #7a7062;
+  --hijau: #9eb7a7;
+  --putih: #f8f6f0;
+  --merah: #fb7979;
+}
+
+* {
+  font-family: "Oswald", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding-top: 10rem;
+  background-color: var(--putih);
+  height: 100vh;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  margin-top: 0px;
+  background: #7a7062;
+  z-index: 1;
+  padding: 0rem 20rem !important;
+}
+
+nav .active {
+  padding: 0 2rem;
+}
+
+nav #signup {
+  background-color: #46423d;
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+nav #login {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin-right: 4rem;
+}
+
+.navbar {
+  border-radius: none !important;
+  margin-bottom: 0 !important;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav li {
+  font-weight: 300;
+  float: left;
+  color: white;
+  margin: 0 0rem !important;
+  padding: 0 2.5rem !important;
+  line-height: 4rem;
+}
+
+nav li#login {
+  padding: 0 3rem !important;
+  /* margin-right: 2.5rem !important; */
+}
+
+.navbar-brand img {
+  height: 30px !important;
+}
+
+nav li:hover {
+  background-color: rgb(144, 160, 137);
+  transition: 0.5s;
+}
+
+nav li#signup:hover {
+  background-color: rgb(105, 114, 104);
+  transition: 0.5s;
+}
+
+.logo {
+  cursor: pointer;
+  filter: invert(100%);
+}
+
+/* Bootstrap Modal */
+.modal {
+  text-align: center;
+  padding: 0 !important;
+}
+
+.modal:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-footer button {
+  padding: 0.5rem 3rem !important;
+}
+
+/* EDIT PAGE CSS */
+#btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 3rem 0;
+}
+
+#btn-container button {
+  padding: 1rem 3rem;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: 0.4s;
+  margin-left: 2rem;
+  border: none;
+}
+
+#cancel {
+  background-color: var(--merah);
+  color: white;
+}
+
+#cancel:hover {
+  background-color: #c54c4c;
+}
+
+#save {
+  background-color: var(--hijau);
+  color: black;
+}
+
+#save:hover {
+  background-color: #829b8b;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input,
+form select {
+  padding: 1rem 3rem;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 1rem;
+  /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25); */
+  outline: 1px solid rgb(184, 184, 184);
+  transition: outline 0.1s ease;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  border: none;
+}
+
+.ck {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input:focus,
+input:active {
+  outline: none;
+}
+
+input[name="headline"] {
+  font-size: 2.5rem;
+  margin-top: 5rem;
+}
+
+label[for="photo"] {
+  background-color: var(--coklat-muda);
+  color: var(--putih);
+  padding: 1rem 5rem;
+  border-radius: 30px;
+  font-weight: 400;
+  transition: 0.4s;
+  margin: 2rem 0 0 0;
+  float: right;
+}
+
+label[for="photo"]:hover {
+  background-color: #3f7a55; /* Green */
+  color: white;
+}
+
+label:hover,
+select,
+option {
+  cursor: pointer;
+}
+
+#photo {
+  display: none;
+}
+
+#discPhoto {
+  width: 100%;
+  height: auto;
+}
+
+.cat-list label {
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+/* NAVBAR BREAKPOINTS */
+@media screen and (max-width: 62em) {
+  nav {
+    padding: 0 5rem !important;
+  }
+}
+
+@media screen and (max-width: 48em) {
+  nav {
+    padding: 0 3rem !important;
+  }
+}
+
+@media screen and (max-width: 30em) {
+  nav {
+    padding: 0 1rem !important;
+  }
+
+  li#signup.active {
+    padding: 20px !important;
+    font-size: 12px;
+  }
+
+  li#login {
+    font-size: 12px;
+  }
+
+  .navbar-brand {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .navbar-brand img {
+    height: 23px !important;
+    width: auto;
+  }
+}

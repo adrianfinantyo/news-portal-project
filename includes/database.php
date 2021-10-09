@@ -5,6 +5,6 @@
     $user = "root";
     $password = "";
 
-    $data = new PDO("mysql:host=$host; dbname=$dbname", $user, $password);
+    $data = new mysqli($host, $user, $password, $dbname);
 
 ?>

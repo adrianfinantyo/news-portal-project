@@ -1,3 +1,12 @@
+:root {
+  --coklat-gelap: #46423d;
+  --coklat-tua: #6a5b56;
+  --coklat-muda: #7a7062;
+  --hijau: #9eb7a7;
+  --putih: #f8f6f0;
+  --merah: #fb7979;
+}
+
 * {
   font-family: "Oswald", sans-serif;
 }
@@ -17,16 +26,15 @@ nav {
   background: #7a7062;
   z-index: 1;
   padding: 0rem 20rem !important;
-  padding-left: 17rem !important;
 }
 
 .logo-wrapper {
-  height: 5rem;
+  margin-bottom: 30px;
 }
 
 .logo-wrapper img {
-  height: 50px;
-  width: auto;
+  height: auto;
+  width: 40%;
 }
 
 nav .active {
@@ -49,6 +57,7 @@ nav #login {
 
 .navbar {
   border-radius: none !important;
+  margin-bottom: 0 !important;
 }
 
 nav ul {
@@ -71,10 +80,6 @@ nav li#login {
 
 .navbar-brand img {
   height: 30px !important;
-}
-
-.logo-wrapper {
-  margin-bottom: 30px;
 }
 
 .jb-container {
@@ -104,24 +109,28 @@ nav li#login {
   width: 100%;
   height: 500px;
   opacity: 0.5;
+  filter: blur(2px);
 }
 
-.bottom-left {
+.hero {
   position: absolute;
   bottom: 30px;
   left: 40px;
-  margin-right: 500px;
+  width: 60%;
   color: #000000;
 }
 
-.bottom-left h1 {
+.hero h1 {
   font-size: 5rem;
 }
 
-.bottom-left p {
+.hero p {
   font-size: 2rem;
   line-height: 25px;
   text-align: justify;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 10rem;
 }
 
 .littlenav {
@@ -132,7 +141,7 @@ nav li#login {
   top: 0px;
   width: 100% !important;
   background: #46423d;
-  z-index: 1;
+  z-index: unset;
   padding: 0rem 0rem !important;
   margin-left: 0px !important;
   margin-right: auto;
@@ -154,22 +163,31 @@ nav li#login {
   color: white !important;
 }
 
-.littlenav li:hover {
-  background-color: rgb(144, 160, 137);
-  transition: 0.5s;
+.nav > li > a:focus,
+.nav > li > a:hover {
+  background-color: rgb(144, 160, 137) !important;
+  transition: 0.5s !important;
 }
 
 .row {
   margin: 0px 0px !important;
 }
 
+.row > .isi {
+  font-size: 13px;
+  width: 400px;
+  height: 37px;
+  text-align: justify;
+  overflow: hidden;
+}
+
 #newsLate {
-  border-bottom: 3px solid black !important;
+  border-bottom: 3px solid var(--coklat-gelap) !important;
   padding-bottom: 10px;
 }
 
 #category {
-  border-bottom: 3px solid black !important;
+  border-bottom: 3px solid var(--coklat-gelap) !important;
   margin-top: 27px;
   padding-bottom: 10px;
 }
@@ -191,4 +209,274 @@ nav li#signup:hover {
 .logo {
   cursor: pointer;
   filter: invert(100%);
+}
+
+.container-img img {
+  width: 100% !important;
+  height: auto;
+}
+
+#bagian-kanan {
+  display: flex;
+}
+
+.img-kanan {
+  width: 100%;
+  height: auto;
+}
+
+#news-bagian-kanan {
+  padding-right: 0px;
+}
+
+.h4-kanan {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+#iklan {
+  margin-top: 27px;
+  border-bottom: 3px solid black !important;
+  padding-bottom: 10px;
+}
+
+.iklan {
+  margin-top: 2rem;
+}
+
+.iklan img {
+  width: 100%;
+  height: auto;
+}
+
+/* breakpoints 2xl */
+@media screen and (max-width: 96em) {
+}
+
+/* breakpoints xl */
+@media screen and (max-width: 80em) {
+  .logo-wrapper img {
+    width: 30%;
+  }
+}
+
+/* breakpoints lg */
+@media screen and (max-width: 62em) {
+  nav {
+    padding: 0 5rem !important;
+  }
+}
+
+/* breakpoints md */
+@media screen and (max-width: 48em) {
+  nav {
+    padding: 0 3rem !important;
+  }
+}
+
+/* breakpoints sm */
+@media screen and (max-width: 30em) {
+  .hero {
+    width: 80%;
+  }
+
+  .no-padd {
+    padding: 0 !important;
+  }
+
+  nav {
+    padding: 0 1rem !important;
+  }
+
+  .logo-wrapper img {
+    width: 60%;
+  }
+
+  .no-padd {
+    padding: 0 !important;
+  }
+
+  li#signup.active {
+    padding: 20px !important;
+    font-size: 12px;
+  }
+
+  li#login {
+    font-size: 12px;
+  }
+
+  .navbar-brand {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .navbar-brand img {
+    height: 23px !important;
+    width: auto;
+  }
+}
+
+/* FOOTER */
+.site-footer {
+  background-color: #7a7062;
+  padding: 45px 0 20px;
+  font-size: 15px;
+  line-height: 24px;
+  color: white;
+  margin-top: 10rem;
+}
+.site-footer hr {
+  border-top-color: #bbb;
+  opacity: 0.5;
+}
+.site-footer hr.small {
+  margin: 20px 0;
+}
+.site-footer h6 {
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  letter-spacing: 2px;
+}
+.site-footer a {
+  color: var(--hijau);
+}
+.site-footer a:hover {
+  color: #3366cc;
+  text-decoration: none;
+}
+.footer-links {
+  padding-left: 0;
+  list-style: none;
+}
+.footer-links li {
+  display: block;
+}
+.footer-links a {
+  color: white;
+}
+.footer-links a:active,
+.footer-links a:focus,
+.footer-links a:hover {
+  color: #3366cc;
+  text-decoration: none;
+}
+.footer-links.inline li {
+  display: inline-block;
+}
+.site-footer .social-icons {
+  text-align: right;
+}
+.site-footer .social-icons a {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 6px;
+  margin-right: 0;
+  border-radius: 100%;
+  background-color: white;
+}
+
+.copyright-text {
+  margin: 0;
+}
+@media (max-width: 991px) {
+  .site-footer [class^="col-"] {
+    margin-bottom: 30px;
+  }
+
+  .categories {
+    margin-left: 0 !important;
+  }
+}
+@media (max-width: 767px) {
+  .site-footer {
+    padding-bottom: 0;
+  }
+  .site-footer .copyright-text,
+  .site-footer .social-icons {
+    text-align: center;
+  }
+
+  .categories {
+    margin-left: 0 !important;
+  }
+}
+.social-icons {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.social-icons li {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+.social-icons li.title {
+  margin-right: 15px;
+  text-transform: uppercase;
+  color: #96a2b2;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.social-icons a {
+  background-color: #eceeef;
+  /* INI YANG HARUSNYA WARNA ICON NYA */
+  color: black;
+
+  font-size: 16px;
+  display: inline-block;
+  line-height: 44px;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.social-icons a:active,
+.social-icons a:focus,
+.social-icons a:hover {
+  color: #fff;
+  background-color: #29aafe;
+}
+.social-icons.size-sm a {
+  line-height: 34px;
+  height: 34px;
+  width: 34px;
+  font-size: 14px;
+}
+
+.social-icons a.facebook:hover {
+  background-color: #3b5998;
+}
+.social-icons a.twitter:hover {
+  background-color: #00aced;
+}
+.social-icons a.linkedin:hover {
+  background-color: #007bb6;
+}
+.social-icons a.instagram:hover {
+  background-color: #ea4c89;
+}
+@media (max-width: 767px) {
+  .social-icons li.title {
+    display: block;
+    margin-right: 0;
+    font-weight: 600;
+  }
+
+  .categories {
+    margin-left: 0 !important;
+  }
+}
+
+.categories {
+  margin-left: 23rem;
+}
+
+.iklan {
+  cursor: pointer;
 }
