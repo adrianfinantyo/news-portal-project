@@ -32,6 +32,30 @@ nav {
   margin-bottom: 30px;
 }
 
+.profile-p {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.profile-p span:not([class="d-inline-block"]) {
+  margin-left: 1rem;
+}
+
+.p-wrapper {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.p-wrapper img {
+  width: 100%;
+  height: auto;
+}
+
 .logo-wrapper img {
   height: auto;
   width: 40%;
@@ -84,6 +108,7 @@ nav li#login {
 
 .jb-container {
   position: relative;
+  overflow: hidden;
 }
 
 .jb-container p {
@@ -107,7 +132,7 @@ nav li#login {
 
 #jb-img {
   width: 100%;
-  height: 500px;
+  height: auto;
   opacity: 0.5;
   filter: blur(2px);
 }
@@ -175,10 +200,14 @@ nav li#login {
 
 .row > .isi {
   font-size: 13px;
-  width: 400px;
+  width: 100%;
   height: 37px;
   text-align: justify;
   overflow: hidden;
+}
+
+.isi p {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #newsLate {
@@ -208,16 +237,11 @@ nav li#signup:hover {
 
 .logo {
   cursor: pointer;
-  filter: invert(100%);
 }
 
 .container-img img {
   width: 100% !important;
   height: auto;
-}
-
-#bagian-kanan {
-  display: flex;
 }
 
 .img-kanan {
@@ -280,6 +304,14 @@ nav li#signup:hover {
     width: 80%;
   }
 
+  .hero h2 {
+    font-size: 24px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
   .no-padd {
     padding: 0 !important;
   }
@@ -312,6 +344,10 @@ nav li#signup:hover {
   .navbar-brand img {
     height: 23px !important;
     width: auto;
+  }
+
+  nav li {
+    padding: 0 0 !important;
   }
 }
 
@@ -450,7 +486,7 @@ nav li#signup:hover {
 }
 
 .social-icons a.facebook:hover {
-  background-color: #3b5998;
+  background-color: red;
 }
 .social-icons a.twitter:hover {
   background-color: #00aced;

@@ -55,6 +55,17 @@
             mysqli_close($data);
             return $isSuccess;
         } 
+
+        public function getProfilePath(){
+            include "../../includes/database.php";
+            $stmt = $data->prepare("SELECT profilepath FROM user WHERE email = ?");
+	        $stmt->bind_param("s", $this->email);
+	        $stmt->execute();
+            $result = $stmt->get_result();
+            
+            mysqli_close($data);
+            return $result;
+        }
     }
 
     class Posting {
@@ -65,9 +76,8 @@
         private $tanggal;
         private $path;
         private $konten;
-        private $likecount;
 
-        function __construct($id, $judul, $kategori, $penulis, $tanggal, $path, $konten, $likecount) {
+        function __construct($id, $judul, $kategori, $penulis, $tanggal, $path, $konten) {
             $this->id = $id;
             $this->judul = $judul;
             $this->kategori = $kategori;
@@ -75,7 +85,6 @@
             $this->tanggal = $tanggal;
             $this->path = $path;
             $this->konten = $konten;
-            $this->likecount = $likecount;
         }
         
         public function getId() {
@@ -99,9 +108,6 @@
         public function getKonten() {
             return $this->konten;
         }
-        public function getLike() {
-            return $this->likecount;
-        }
 
         public function insertData() {
             include "../../includes/database.php";
@@ -113,8 +119,8 @@
 
         public function updateData() {
             include "../../includes/database.php";
-            $stmt = $data->prepare("UPDATE post SET id = ?, judul = ?, kategori = ?, penulis = ?, tanggalPublikasi = ?, pictpath = ?, isikonten = ?, jumlahlike WHERE id = ?");
-            $stmt->bind_param("sssssssis", $this->id, $this->judul, $this->kategori, $this->penulis, $this->tanggal, $this->path, $this->konten, $this->likecount, $this->id);
+            $stmt = $data->prepare("UPDATE post SET judul = ?, kategori = ?, penulis = ?, tanggalPublikasi = ?, pictpath = ?, isikonten = ? WHERE id = ?");
+            $stmt->bind_param("sssssss", $this->judul, $this->kategori, $this->penulis, $this->tanggal, $this->path, $this->konten, $this->id);
             $stmt->execute();
             mysqli_close($data);
         }
@@ -140,7 +146,6 @@
             $this->tanggal = $row['tanggalPublikasi'];
             $this->path = $row['pictpath'];
             $this->konten = $row['isikonten'];
-            $this->likecount = $row['jumlahlike'];
         }
 
         public function tableData() {
@@ -151,20 +156,30 @@
             return $hasil;
         }
 
-        public function latestKiri() {
+        public function searchPostByQuery($search){
             include "../../includes/database.php";
-			$post = "SELECT * FROM post ORDER BY tanggalPublikasi DESC LIMIT 3";
-            $hasil = $data->query($post);
+			$post = "SELECT * FROM post WHERE judul LIKE '%$search%'";
+			$hasil = $data->query($post);
 
             return $hasil;
         }
 
-        public function latestKanan() {
+        public function getLatestPost($category) {
             include "../../includes/database.php";
-			$post = "SELECT * FROM post ORDER BY tanggalPublikasi DESC LIMIT 3,10";
-            $hasil = $data->query($post);
-
-            return $hasil;
+            
+            if($category !== null){
+                $query= "SELECT * FROM post WHERE kategori = ? ORDER BY tanggalPublikasi DESC";
+                $stmt = $data->prepare($query);
+                $stmt->bind_param("s", $category);
+                $stmt->execute();
+                $res = $stmt->get_result();
+                mysqli_close($data);
+            } else {
+                $query= "SELECT * FROM post ORDER BY tanggalPublikasi DESC";
+                $res = $data->query($query);
+                mysqli_close($data);
+            }
+            return $res;
         }
     }
 
@@ -173,12 +188,71 @@
         private $idPosting;
         private $komentar;
         private $tanggal;
+        private $idComment;
 
-        function __construct($emailUser, $idPosting, $komentar, $tanggal) {
+        function __construct($emailUser, $idPosting, $komentar, $tanggal, $idComment) {
             $this->emailUser = $emailUser;
             $this->idPosting = $idPosting;
             $this->komentar = $komentar;
             $this->tanggal = $tanggal;
+            $this->idComment = $idComment;
+        }
+
+        public function newComment() {
+            include "../../includes/database.php";
+            $stmt = $data->prepare("INSERT INTO komentar (idPosting, emailUser, komentar, tanggal) VALUES(?, ?, ?, ?)");
+            $stmt->bind_param("isss", $this->idPosting, $this->emailUser, $this->komentar, $this->tanggal);
+            $stmt->execute();
+            mysqli_close($data);
+        }
+        
+        public function getCommentsByPost(){
+            include "../../includes/database.php";
+            $query = "SELECT k.*, concat_ws(' ', u.firstname, u.lastname) as `fullName`, u.profilepath, (SELECT count(*) FROM likes l WHERE k.idKomentar = l.idKomentar GROUP BY k.idKomentar) AS `jumlahLike` FROM komentar k, `user` u WHERE k.emailUser = u.email AND k.idPosting = ? ORDER BY k.idKomentar DESC;";
+            $stmt = $data->prepare($query);
+            $stmt->bind_param("s", $this->idPosting);
+            $stmt->execute();
+            $hsl = $stmt->get_result();
+            mysqli_close($data);
+            return $hsl;
+        }
+    }
+
+    class Likes {
+        private $emailUser;
+        private $idComment;
+
+        function __construct($emailUser, $idComment) {
+            $this->emailUser = $emailUser;
+            $this->idComment = $idComment;
+        }
+
+        public function addLikes(){
+            include "../../includes/database.php";
+            $query= "INSERT INTO likes (emailUser, idKomentar) VALUES (?, ?)";
+            $stmt = $data->prepare($query);
+            $stmt->bind_param("ss", $this->emailUser, $this->idComment);
+            $stmt->execute();
+            mysqli_close($data);
+        }
+
+        public function searchForLike(){
+            include "../../includes/database.php";
+            $query= "SELECT * FROM likes WHERE emailUser = ?";
+            $stmt = $data->prepare($query);
+            $stmt->bind_param("s", $this->emailUser);
+            $stmt->execute();
+            $arrayLike = $stmt->get_result();
+            mysqli_close($data);
+            return $arrayLike;
+        }
+
+        public function deleteLikes() {
+            include "../../includes/database.php";
+            $stmt = $data->prepare("DELETE FROM LIKES WHERE emailUser = ? AND idKomentar = ?");
+            $stmt->bind_param("ss", $this->emailUser, $this->idComment);
+            $stmt->execute();
+            mysqli_close($data);
         }
     }
 ?>

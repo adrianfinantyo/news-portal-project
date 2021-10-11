@@ -85,7 +85,52 @@ nav li#signup:hover {
 
 .logo {
   cursor: pointer;
-  filter: invert(100%);
+}
+
+.control-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input[name="search"] {
+  padding: 0.8rem 2rem;
+  width: 20rem;
+  border-radius: 30px;
+  border: none;
+  transition: all 0.5s ease;
+}
+
+input[name="search"]:focus {
+  width: 25rem;
+  outline: none;
+}
+
+button[init="search"] {
+  border: none;
+  background: transparent;
+  margin-left: -3rem;
+}
+
+.control-btn button[name="add"] span {
+  margin-right: 1rem;
+}
+
+.control-btn button[name="add"] {
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  border: none;
+  background-color: #4183d7;
+  color: white;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.control-btn button[name="add"]:hover {
+  background-color: #336cb8;
+  transform: translate(-2px, 2px);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
 }
 
 .article-container {
@@ -95,6 +140,7 @@ nav li#signup:hover {
   padding: 1rem;
   border-radius: 5px;
   margin: 2rem 0;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
 .img-wrapper {
@@ -151,6 +197,32 @@ h3 {
   align-items: center;
 }
 
+button[init="edit"] {
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--hijau);
+  color: white;
+}
+
+button[init="delete"] {
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--merah);
+  color: white;
+}
+
+.button-container span {
+  transition: all 0.3s ease;
+}
+
+.button-container span:hover {
+  transform: translateY(-5px);
+}
+
 /* breakpoints 2xl */
 @media screen and (max-width: 96em) {
 }
@@ -196,4 +268,60 @@ h3 {
     height: 23px !important;
     width: auto;
   }
+
+  .article-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .button-container {
+    flex-direction: row;
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  .img-wrapper {
+    width: 80%;
+  }
+
+  .inner-container {
+    padding: 1rem 1rem 0 1rem;
+    width: 100%;
+  }
+
+  .p-container {
+    min-height: 2rem;
+    max-height: 13rem;
+  }
+
+  .tag-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+}
+
+.profile-p {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.profile-p span {
+  margin-left: 1rem;
+}
+
+.p-wrapper {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.p-wrapper img {
+  width: 100%;
+  height: auto;
 }

@@ -176,7 +176,7 @@ a {
     display: unset;
   }
 
-  .login-card img {
+  .login-card .logo {
     display: none;
   }
 

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,11 +41,29 @@
     <?php
     require_once "../../controller/process.php";
 
-    if(!isset($_SESSION["userEmail"]) && !isset($_SESSION["userName"])){
-        header("location: ../../");
+    if(checkSession() && $_SESSION["userLevel"] === "A"){
+        $userName = $_SESSION["userName"];
+        $path = "../../upload/profile/" . getProfilePath($_SESSION["userEmail"])["profilepath"];
+      echo "
+        <script>
+          $(document).ready(() => {
+            $('.login').hide();
+            $('.logout').show();
+            document.getElementById('ppict').setAttribute('src', '$path');
+            document.getElementById('pname').innerHTML = '$userName';
+          });
+        </script>
+      ";
+    } else {
+      header("location: ../home/");
     }
 
-    if(isset($_GET["mode"]) && $_GET["mode"] === "edit"){
+    $konten = null;
+    $path = null;
+    $status = null;
+    $kategori = null;
+
+    if(isset($_GET["postId"]) && $_GET["postId"] !== ""){
       echo "
       <script>
           $(document).ready(() => {
@@ -50,10 +72,35 @@
           })
       </script>
       ";
-      handleEditPost();
+      $status = "edit";
+      $obj = handleInitPost();
+      $konten = $obj->getKonten();
+      $path = "../../upload/content/" . $obj->getPath();
+      $kategori = $obj->getKategori();
+      handleEditPost($obj);
     } else  {
       handleCreatePost();
     }
+
+    if(isset($_SESSION["userEmail"]) && isset($_SESSION["userName"])){
+        echo "
+          <script>
+            $(document).ready(() => {
+              $('.login').hide();
+              $('.logout').show();
+            });
+          </script>
+        ";
+      } else {
+        echo "
+        <script>
+          $(document).ready(() => {
+            $('.login').show();
+            $('.logout').hide();
+          });
+        </script>
+      ";
+      }    
   ?>
     <!-- MODALS -->
     <div id="errModal" class="modal fade" role="dialog">
@@ -88,38 +135,17 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
                     <button type="button" class="btn btn-danger"
-                        onclick="window.location.href = '../home/'">Yes</button>
+                        onclick="window.location.href = '../dashboard/'">Yes</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Navbar -->
-    <?php
-      if(isset($_SESSION["userEmail"]) && isset($_SESSION["userName"])){
-        echo "
-          <script>
-            $(document).ready(() => {
-              $('.login').hide();
-              $('.logout').show();
-            });
-          </script>
-        ";
-      } else {
-        echo "
-        <script>
-          $(document).ready(() => {
-            $('.login').show();
-            $('.logout').hide();
-          });
-        </script>
-      ";
-      }
-    ?>
-    <nav>
+    <nav data-aos="slide-down" data-aos-delay='500'>
         <div class="navbar-header">
             <div class="navbar-brand">
-                <img src="../../assets/logoblack-text.png" alt="News Portal" class="logo"
+                <img src="../../assets/logo-text.png" alt="News Portal" class="logo"
                     onclick="window.location.href = '../home/'" />
             </div>
         </div>
@@ -130,6 +156,12 @@
             <a href="../login/" class="login">
                 <li id="login">Login</li>
             </a>
+            <li class="logout">
+                <div class="profile-p">
+                    <div class="p-wrapper"><img id="ppict" alt="Profile Picture"></div>
+                    <span id="pname"></span>
+                </div>
+            </li>
             <a href="../logout/" class="logout">
                 <li id="login">Logout</li>
             </a>
@@ -143,31 +175,41 @@
                 <div class="col-sm-8">
                     <div class="row">
                         <h1 id="headTitle">Create Post</h1>
-                        <input name="id" placeholder="id" hidden />
-                        <input name="headline" placeholder="Title" />
-                        <textarea name="content" id="editor" placeholder="Write your story here!">
-              </textarea>
+                        <input name="id" placeholder="id" hidden
+                            value="<?php if(isset($_GET["postId"]) && $_GET["postId"] !== "") {echo $obj->getId();};?>" />
+                        <input name="headline" placeholder="Title"
+                            value="<?php if(isset($_GET["postId"]) && $_GET["postId"] !== "") {echo $obj->getJudul();};?>" />
+                        <textarea name="content" id="editor" placeholder="Write your story here!" value="">
+                        </textarea>
                     </div>
                 </div>
                 <span class="col-sm-1"></span>
                 <div class="col-sm-3">
-                    <div class="row" id="btn-container">
+                    <div class="row" id="btn-container" data-aos="fade-left" data-aos-delay='1000'>
                         <button id="cancel" type="button" onclick="handleCancel(event)">Cancel</button>
-                        <button id="save" type="button" onclick="handleSubmit(event)">Post</button>
+                        <button id="save" type="button" onclick="handleSubmit('<?=$status;?>')">Post</button>
                     </div>
                     <div class="row">
                         <h3>Category</h3>
-                        <select name="kategori" id="kategori">
-                            <option value="uncategorized" hidden>Uncategorized</option>
-                            <option value="automotive">Automotive</option>
+                        <select name="kategori" id="kategori" style="text-transform: capitalize;">
+                            <option value="<?php if($kategori !== null) echo $kategori; else echo 'Uncategorized'; ?>"
+                                hidden>
+                                <?php if($kategori !== null) echo $kategori; else echo 'Uncategorized'; ?>
+                            </option>
+                            <option value="international">International</option>
+                            <option value="sports">Sports</option>
+                            <option value="opinion">Opinion</option>
+                            <option value="business">Business</option>
+                            <option value="entertaintment">Entertainment</option>
                             <option value="education">Education</option>
-                            <option value="entertaintment">Entertaintment</option>
-                            <option value="food">Food</option>
+                            <option value="lifestyle">Lifestyle</option>
                         </select>
                     </div>
                     <div class="row">
                         <h3>Picture</h3>
-                        <img id="discPhoto" src="https://i.stack.imgur.com/y9DpT.jpg" alt="Photo Attachment" />
+                        <img id="discPhoto"
+                            src="<?php if($path !== null) echo $path; else echo 'https://i.stack.imgur.com/y9DpT.jpg'; ?>"
+                            alt="Photo Attachment" />
                         <label for="photo">Upload Picture</label>
                         <input id="photo" type="file" accept="image/*" name="photo" />
                     </div>
@@ -175,14 +217,38 @@
             </div>
         </div>
     </form>
+    <?php
+        if($konten !== null){
+            echo "
+            <script>
+            ClassicEditor.create(document.querySelector('#editor'))
+                .then((editor) => {
+                    editor.setData(`" . $konten . "`);
+                })
+                .catch((error) => {
+                });
+            </script>
+            ";
+        } else {
+            echo "
+            <script>
+            ClassicEditor.create(document.querySelector('#editor'))
+                .then((editor) => {
+                })
+                .catch((error) => {
+                });
+            </script>
+            ";
+        }
+    ?>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-    ClassicEditor.create(document.querySelector("#editor"))
-        .then((editor) => {
-            // console.log(editor);
-        })
-        .catch((error) => {
-            // console.error(error);
-        });
+    AOS.init({
+        offset: 80,
+        duration: 500,
+        easing: 'ease',
+        once: true
+    });
     </script>
 </body>
 

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "../../controller/process.php";
 ?>
 <?php
@@ -69,8 +70,8 @@
                 <input type="password" placeholder="Password" name="pass" />
                 <br>
                 <label>Captcha (Sensitive Case)</label>
-				<img src="captcha.php" alt="gambar">
-				<input id="captcha" type="text" name="captcha" placeholder="Masukkan Captcha..." required>	
+                <img class="captcha" src="captcha.php" alt="gambar">
+                <input id="captcha" type="text" name="captcha" placeholder="Masukkan Captcha..." required>
                 <button type="submit" name="login">Login</button>
                 <?php if(isset($error) && $error === "datasalah") : ?>
                 <p style="color: red;">Email tidak terdaftar atau password salah, silakan coba lagi</p>

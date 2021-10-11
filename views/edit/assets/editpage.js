@@ -9,12 +9,13 @@ $(document).ready(() => {
   });
 });
 
-const handleSubmit = (event) => {
+const handleSubmit = (status) => {
   const form = $("#contentForm");
 
   const title = form.find('input[name="headline"]').val() || null;
   const content = form.find('textarea[name="content"]').val() || null;
-  const photo = form.find('input[name="photo"]').val() || null;
+  const photo =
+    form.find('input[name="photo"]').val() || status === "edit" ? true : null;
 
   const isFilled = () => {
     if (title && content && photo) return true;

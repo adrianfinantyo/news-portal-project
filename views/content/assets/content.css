@@ -17,13 +17,40 @@ nav {
   background: #7a7062;
   z-index: 1;
   padding: 0rem 20rem !important;
-  padding-left: 0rem !important;
 }
 
+/* INI LOGO */
 .logo {
   cursor: pointer;
-  filter: invert(100%);
 }
+
+.logo-mobile {
+  width: 50px;
+  height: auto;
+  cursor: pointer;
+  display: none !important;
+}
+
+.media {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+
+.media iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
 nav .active {
   padding: 0 2rem;
 }
@@ -54,6 +81,7 @@ nav #login {
 
 .navbar {
   border-radius: none !important;
+  margin-bottom: 0;
 }
 
 nav ul {
@@ -96,11 +124,11 @@ nav li#login {
   align-items: center;
   justify-content: flex-start;
   top: 0px;
-  width: auto !important;
+  width: 100% !important;
   background: #46423d;
-  z-index: 0;
-  padding: 0rem 0rem;
-  margin-left: 125px !important;
+  z-index: unset;
+  padding: 0rem 0rem !important;
+  margin-left: 0px !important;
   margin-right: auto;
   border: none;
   border-radius: none !important;
@@ -120,37 +148,30 @@ nav li#login {
   color: white !important;
 }
 
-.littlenav li:hover {
-  background-color: rgb(144, 160, 137);
-  transition: 0.5s;
+.nav > li > a:focus,
+.nav > li > a:hover {
+  background-color: rgb(144, 160, 137) !important;
+  transition: 0.5s !important;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: 75% auto;
-  grid-gap: 10px;
-  padding: 10px;
-  padding-left: 125px;
-  padding-top: 50px;
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
-.grid-container img {
-  width: 746px;
-  height: 450px;
-  padding: 20px 20px 20px 0px;
-}
-
-.grid-container p {
-  padding-right: 150px;
-  font-size: 15px;
+.isi p {
+  font-size: 16px;
+  text-align: justify;
+  width: 100%;
+  line-height: 1.8;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .detail {
-  font-weight: lighter;
-  font-size: 13px;
+  margin-top: 10px;
 }
 
-.grid-container form {
+form {
   padding-top: 75px;
 }
 
@@ -291,9 +312,7 @@ nav li#login {
 
 .social-icons a {
   background-color: #eceeef;
-  /* INI YANG HARUSNYA WARNA ICON NYA */
   color: black;
-
   font-size: 16px;
   display: inline-block;
   line-height: 44px;
@@ -320,7 +339,7 @@ nav li#login {
 }
 
 .social-icons a.facebook:hover {
-  background-color: #3b5998;
+  background-color: red;
 }
 .social-icons a.twitter:hover {
   background-color: #00aced;
@@ -343,10 +362,209 @@ nav li#login {
   }
 }
 
+/* breakpoints 2xl */
+@media screen and (max-width: 96em) {
+}
+
+/* breakpoints xl */
+@media screen and (max-width: 80em) {
+  .logo-wrapper img {
+    width: 30%;
+    height: auto;
+  }
+}
+
+/* breakpoints lg */
+@media screen and (max-width: 62em) {
+  nav {
+    padding: 0 5rem !important;
+  }
+}
+
+/* breakpoints md */
+@media screen and (max-width: 48em) {
+  nav {
+    padding: 0 3rem !important;
+  }
+
+  textarea {
+    width: 100% !important;
+  }
+}
+
+/* breakpoints sm */
+@media screen and (max-width: 30em) {
+  .hero {
+    width: 80%;
+  }
+
+  .no-padd {
+    padding: 0 !important;
+  }
+
+  nav {
+    padding: 0 1rem !important;
+  }
+
+  .logo {
+    display: none !important;
+  }
+
+  .logo-mobile {
+    display: unset !important;
+  }
+
+  .logo-wrapper img {
+    width: 60%;
+    height: auto;
+  }
+
+  .no-padd {
+    padding: 0 !important;
+  }
+
+  li#signup.active {
+    padding: 20px !important;
+    font-size: 12px;
+  }
+
+  li#login {
+    font-size: 12px;
+  }
+
+  .navbar-brand {
+    padding: 1.5rem 0.8rem;
+  }
+
+  .navbar-brand img {
+    height: 23px !important;
+    width: auto;
+  }
+
+  form {
+    width: 50%;
+  }
+
+  textarea {
+    width: 200% !important;
+  }
+
+  .isi-daftar-komentar {
+    width: 100% !important;
+  }
+}
+
 .categories {
   margin-left: 23rem;
 }
 
 .iklan {
   cursor: pointer;
+}
+
+#iklan {
+  margin-top: 27px;
+  border-bottom: 3px solid black !important;
+  padding-bottom: 10px;
+}
+
+.iklan {
+  margin-top: 2rem;
+}
+
+.iklan img {
+  width: 100%;
+  height: auto;
+}
+
+.photo-placeholder img {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.profile-p {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.profile-p span {
+  margin-left: 1rem;
+}
+
+.p-wrapper {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.p-wrapper img {
+  width: 100%;
+  height: auto;
+}
+
+.daftar-komentar {
+  margin-top: 10rem;
+}
+
+.box {
+  height: 10vh;
+}
+
+.photo-placeholder {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+  overflow: hidden;
+  display: center;
+}
+
+.like-icon {
+  margin-left: 7rem;
+  display: flex;
+  width: max-content;
+}
+
+.like-icon img {
+  width: 20px;
+  height: auto;
+}
+
+.like-icon h6 {
+  margin: 5px 5px;
+}
+
+.isi-daftar-komentar {
+  display: flex;
+  flex-direction: column;
+  border-style: groove;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.comment-img-text {
+  display: flex;
+  width: 100%;
+}
+
+.comment-text {
+  margin-left: 2rem;
+}
+
+.comment-text p {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: justify;
+}
+
+.comment-text h4 {
+  color: red;
+  margin: 0;
+}
+
+.foto-konten {
+  width: 100%;
 }
